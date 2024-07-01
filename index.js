@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const viewRouter = require('./routes/client/viewRouter')
+const connectToDatabase = require('./database/mongodb')
 
 const app = express();
 // set CSS/images/any static asset folder
@@ -14,4 +15,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.use('/', viewRouter)
 
 const PORT = 3000;
-app.listen(PORT, () => console.log(`Server is listening on port: ${PORT}`));
+app.listen(PORT, () => {
+    console.log(`Server is listening on port: ${PORT}`)
+    connectToDatabase();
+});
