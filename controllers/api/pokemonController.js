@@ -38,11 +38,16 @@ const getOnePokemon = async (req, res) => {
 }
 
 const createOnePokemon = async (req, res) => {
-    const pokemon = req.body;
-    console.log(pokemon);
+    const pokemon = {
+        Name: req.body.Name,
+        Type: req.body.Type,
+        PokedexNo: req.body.PokedexNo,
+        Moves: req.body.Moves.split(', ')
+    }
+
     try {
         const created = await Pokemon.create(pokemon)
-        res.status(201).json({message: 'success', payload: created})
+        res.redirect(`/oneMon/${created.Name}`)
     } catch (error) {
         const packet = {
             message: 'failure in createOnePokemon',
@@ -55,8 +60,25 @@ const createOnePokemon = async (req, res) => {
 
 }
 
+const deleteOnePokemon = async (req, res) => {
+    try {
+        const name = req.params.name[0].toUpperCase() + req.params.name.slice(1).toLowerCase();
+        await Pokemon.deleteOne({ Name: name })
+        res.redirect('/allMons')
+    } catch (error) {
+        const packet = {
+            message: 'failure in deleteOnePokemon',
+            payload: error,
+        }
+        
+        console.log(packet);
+        res.status(500).json(packet);
+    }
+}
+
 module.exports = {
     getAllPokemon,
     getOnePokemon,
     createOnePokemon,
+    deleteOnePokemon,
 }

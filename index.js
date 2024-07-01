@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const methodOverride = require('method-override');
 
 const viewRouter = require('./routes/client/viewRouter')
 const pokemonRouter = require('./routes/api/pokemonRouter')
@@ -14,6 +15,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.set('view engine', 'ejs')
 // set where those res.rendered files live
 app.set('views', path.join(__dirname, 'views'))
+// add non-GET/POST HTTP methods to HTML forms
+app.use(methodOverride('_method'))
 
 app.use('/', viewRouter);
 app.use('/api/pokemon', pokemonRouter);

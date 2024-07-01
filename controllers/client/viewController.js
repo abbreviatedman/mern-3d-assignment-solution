@@ -42,8 +42,13 @@ const getOneMonsPage = async (req, res) => {
     }
 }
 
+const getCreateMonsPage = (_, res) => {
+    res.render('createMon');
+}
+
 module.exports = {
     getIndexPage,
     getAllMonsPage,
     getOneMonsPage,
+    getCreateMonsPage,
 }
