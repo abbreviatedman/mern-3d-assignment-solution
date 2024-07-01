@@ -19,7 +19,31 @@ const getAllMonsPage = async (_, res) => {
     }
 }
 
+const getOneMonsPage = async (req, res) => {
+    const name = req.params.name[0].toUpperCase() + req.params.name.slice(1).toLowerCase();
+    try {
+        const pokemon = await Pokemon.findOne({ Name: name })
+        if (!pokemon) {
+            // TODO: create and render here a 404 page
+            // res.status(404).json({message: 'failure', payload: 'No pokemon with that name found.'})
+            
+            // return;
+        }
+
+        res.render('oneMon', {pokemon: pokemon})
+    } catch (error) {
+        const packet = {
+            message: 'failure in getOnePokemon',
+            payload: error
+        };
+
+        console.log(packet);
+        res.status(500).json(packet);
+    }
+}
+
 module.exports = {
     getIndexPage,
     getAllMonsPage,
+    getOneMonsPage,
 }

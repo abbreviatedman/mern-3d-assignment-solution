@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head') %>
+<body>
+    <h1>Welcome to the Pokemon App!</h1>
+    <h2><%= pokemon.PokedexNo %></h2>
+    <h2><%= pokemon.Name %></h2>
+    <h3><%= pokemon.Type %></h3>
+    <ul>
+        <% pokemon.Moves.forEach((move) => { %>
+            <li><%= move %></li>
+        <% }) %>
+    </ul>
+</body>
+</html>

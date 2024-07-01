@@ -6,6 +6,8 @@ const pokemonRouter = require('./routes/api/pokemonRouter')
 const connectToDatabase = require('./database/mongodb')
 
 const app = express();
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 // set CSS/images/any static asset folder
 app.use(express.static(path.join(__dirname, 'public')))
 // set what engine to use for res.render

@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon App</title>
-</head>
+<%- include('./partials/head') %>
 <body>
     <h1>Welcome to the Pokemon App!</h1>
     <% pokemons.forEach((pokemon) => { %>
         <h2><%= pokemon.PokedexNo %></h2>
-        <h3><%= pokemon.Name %></h3>
+        <h3><a href="oneMons/<%= pokemon.Name %>"><%= pokemon.Name %></a></h3>
     <% }) %>
 </body>
 </html>
