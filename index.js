@@ -4,6 +4,7 @@ const methodOverride = require('method-override');
 
 const viewRouter = require('./routes/client/viewRouter')
 const pokemonRouter = require('./routes/api/pokemonRouter')
+const trainerRouter = require('./routes/api/trainerRouter')
 const connectToDatabase = require('./database/mongodb')
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(methodOverride('_method'))
 
 app.use('/', viewRouter);
 app.use('/api/pokemon', pokemonRouter);
+app.use('/api/trainers', trainerRouter);
 
 const PORT = 3000;
 app.listen(PORT, () => {

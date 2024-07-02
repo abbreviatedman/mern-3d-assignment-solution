@@ -239,6 +239,16 @@ app.use(express.json());
 
 16. Create a back-end route to UPDATE one pokemon
 
+Differences between updating and creating on the back end:
+
+(Quick reminder: PUT replaces the entire resource, PATCH updates one field of the resource)
+
+- We'll be taking in WHICH pokemon to update. (Create isn't targeting a current resource.)
+
+Differences between updating and creating on the front end:
+
+We'll still have a form for them to fill out, BUT now we'll pre-populate the form with the pokemon's current data.
+
 - On `./controllers/api/pokemonController.js`:
 - - Define `updateOnePokemon`
 - - Export `updateOnePokemon`

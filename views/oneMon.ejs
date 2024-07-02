@@ -12,7 +12,19 @@
         <% }) %>
     </ul>
     
-    <a href="/updateMon/<%= pokemon.Name %>">Edit this pokemon.</a>
+    <form action="/api/trainers/catch/<%= pokemon._id %>?_method=PUT" method="post">
+        <select name="trainerId">
+            <% trainers.forEach((trainer) => { %>
+                <option value="<%= trainer._id %>"><%= trainer.Name %></option>
+            <% }) %>
+        </select>
+        
+        <input type="submit" value="Catch <%= pokemon.Name %>!">
+    </form>
+    <br><br>
+    <div>
+        <a href="/updateMon/<%= pokemon.Name %>">Edit this pokemon.</a>
+    </div>
     <br><br>
 
     <form action="/api/pokemon/<%= pokemon.Name %>?_method=DELETE" method="POST">
