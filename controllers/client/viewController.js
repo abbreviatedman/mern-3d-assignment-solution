@@ -46,9 +46,17 @@ const getCreateMonsPage = (_, res) => {
     res.render('createMon');
 }
 
+const getUpdateMonsPage = async (req, res) => {
+    const name = req.params.name;
+    const cleanedName = name[0].toUpperCase() + name.slice(1).toLowerCase();
+    const pokemon = await Pokemon.findOne({ Name: cleanedName });
+    res.render('updateMon', {pokemon: pokemon})
+}
+
 module.exports = {
     getIndexPage,
     getAllMonsPage,
     getOneMonsPage,
     getCreateMonsPage,
+    getUpdateMonsPage,
 }

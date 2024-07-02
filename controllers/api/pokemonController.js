@@ -76,9 +76,25 @@ const deleteOnePokemon = async (req, res) => {
     }
 }
 
+const updateOnePokemon = async (req, res) => {
+    const name = req.params.name // the pokemon they want to update, e.g. 'Bulbasaur'
+    const updateData = req.body // the pokemon data they want to update with, e.g. {Name: 'Colinsaur', PokedexNo: -5, Type: 'goof', Moves: ['Goof around', 'Sleep in on weekends']}
+    const cleanedName = name[0].toUpperCase() + name.slice(1).toLowerCase();
+    const pokemon = await Pokemon.findOne({Name: cleanedName})
+    pokemon.Name = updateData.Name;
+    pokemon.Type = updateData.Type;
+    pokemon.Moves = updateData.Moves.split(', ')
+    pokemon.PokedexNo = updateData.PokedexNo;
+    // or, fancier and shorter:
+    // Object.assign(pokemon, updateData)
+    await pokemon.save();
+    res.redirect(`/oneMon/${pokemon.Name}`);
+}
+
 module.exports = {
     getAllPokemon,
     getOnePokemon,
     createOnePokemon,
     deleteOnePokemon,
+    updateOnePokemon,
 }
